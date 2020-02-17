@@ -19,10 +19,13 @@ Generates quantum volume circuits
 import numpy as np
 import qiskit
 from qiskit.quantum_info.random import random_unitary
+from typing import List, Union, Tuple, Any, Optional
 
 
-def qv_circuits(qubit_lists=None, ntrials=1,
-                qr=None, cr=None):
+def qv_circuits(qubit_lists: Optional[List[List[int]]]=None,
+                ntrials: int=1,
+                qr: Optional[qiskit.QuantumRegister]=None,
+                cr: Optional[qiskit.ClassicalRegister]=None):
     """
     Return a list of square quantum volume circuits (depth=width)
 
@@ -32,14 +35,14 @@ def qv_circuits(qubit_lists=None, ntrials=1,
 
     Args:
         qubit_lists: list of list of qubits to apply qv circuits to. Assume
-        the list is ordered in increasing number of qubits
+            the list is ordered in increasing number of qubits
         ntrials: number of random iterations
         qr: quantum register to act on (if None one is created)
         cr: classical register to measure to (if None one is created)
 
     Returns:
         qv_circs: list of lists of circuits for the qv sequences
-        (separate list for each trial)
+        (separate list for each trial).
         qv_circs_nomeas: same as above with no measurements for the ideal
         simulation
     """
